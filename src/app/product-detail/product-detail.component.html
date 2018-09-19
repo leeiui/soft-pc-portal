@@ -1,0 +1,37 @@
+<div class="thumbnail">
+  <img class="slide-image" [src]="product.pic">
+  <div>
+    <h4 class="pull-right">{{product.price}}元</h4>
+    <h4>{{product.trademark}}</h4>
+  </div>
+  <div>
+    <p class="pull-right">共{{comments.length}}条评论</p>
+    <p>
+      <app-stars [rating]="product.rating"></app-stars>
+    </p>
+  </div>
+</div>
+<div class="well">
+  <div>
+    <button class="btn btn-success" (click)="idCommentHidden=!idCommentHidden">发表或隐藏评论</button>
+  </div>
+  <div [hidden]="idCommentHidden">
+    <div>
+      <div><app-stars [readonly]="false" [(rating)]="newRating"></app-stars></div>
+      <div>
+        <textarea [(ngModel)]="newComment" class="form-control" rows="3"></textarea>
+      </div>
+      <div>
+        <button class="btn" (click)="addComment()">提交</button>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngFor="let comment of comments">
+    <hr>
+    <div class="col-md-12">
+      <app-stars [rating]="comment.rating"></app-stars>
+      <span class="pull-right">{{comment.timestamp}}</span>
+      <p>{{comment.content}}</p>
+    </div>
+  </div>
+</div>
